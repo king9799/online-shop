@@ -24,7 +24,7 @@ def log_in(request):
         # if user is None:
         #     return redirect("/")
         # login(request, user)
-        return redirect('/index')
+        return redirect('/dashboard')
     else:
         return render(request, 'login.html')
 

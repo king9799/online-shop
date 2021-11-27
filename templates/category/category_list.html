@@ -1,0 +1,112 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block home %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Kategoriyalar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Kategoriyalar</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Barcha kategoriyalar ro'yhati</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <br>
+                                <div class="row">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <a href='/category_add' class="col-2 btn btn-primary">Kategoriya qo'shish</a>
+
+                                    </form>
+                                </div>
+                                <br>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nomi Uz:</th>
+                                    <th>Nomi Ru:</th>
+                                    <th>Nomi En:</th>
+                                    <th>Rasmi</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tbody>
+                                <tr>
+                                    {% for c in categories %}
+                                        <tr>
+                                            <th scope="row">{{ c.id }}</th>
+                                            <td>{{ c.name_uz }}</td>
+                                            <td>{{ c.name_ru }}</td>
+                                            <td>{{ c.name_en }}</td>
+                                            <td>{{ c.img }}</td>
+                                            <td><a href="/category_edit/{{ c.id }}" class="btn btn-primary">Edit</a></td>
+                                            <td><a href="/category_delete/{{ c.id }}" class="btn btn-danger">Delete</a></td>
+                                        <tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nomi Uz:</th>
+                                    <th>Nomi Ru:</th>
+                                    <th>Nomi En:</th>
+                                    <th>Rasmi</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
+

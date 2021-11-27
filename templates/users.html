@@ -1,0 +1,124 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block home %}
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Foydalanuvchilar</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+                        <li class="breadcrumb-item active">Foydalanuvchilar</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Barcha foydalanuvchilar</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                <br>
+                                <div class="row">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <a href='/orders_add' class="col-2 btn btn-primary">Foydalanuvchilar tahriri</a>
+
+                                    </form>
+                                </div>
+                                <br>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Ism</th>
+                                    <th>Familiya</th>
+                                    <th>Tel raqam</th>
+                                    <th>Manzil</th>
+                                    <th>Haridlar soni</th>
+                                    <th>Bonus</th>
+                                    <th>Statusi</th>
+                                    <th>Sana</th>
+                                    <th>Bloklash</th>
+                                    <th>Parol o`zgartirish</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tbody>
+                                <tr>
+                                    {% for o in users %}
+                                        <tr>
+                                            <th scope="row">{{ o.id }}</th>
+                                            <td>{{ o.first_name }}</td>
+                                            <td>{{ o.last_name }}</td>
+                                            <td>{{ o.phone_numer }}</td>
+                                            <td>{{ o.address }}</td>
+                                            <td>haridlar soni </td>
+                                            <td>{{ o.bonus }}</td>
+                                            <td>{{ o.active }}</td>
+                                            <td>{{ o.data }}</td>
+                                            <td><a href="/products_edit/{{ o.id }}" class="btn btn-primary">Block</a></td>
+                                            <td><a href="/products_delete/{{ o.id }}" class="btn btn-danger">Ch/pass</a></td>
+                                        <tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                 <tr>
+                                    <th>ID</th>
+                                    <th>Ism</th>
+                                    <th>Familiya</th>
+                                    <th>Tel raqam</th>
+                                    <th>Manzil</th>
+                                    <th>Haridlar soni</th>
+                                    <th>Bonus</th>
+                                    <th>Statusi</th>
+                                    <th>Sana</th>
+                                    <th>Bloklash</th>
+                                    <th>Parol o`zgartirish</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
+

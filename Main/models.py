@@ -77,7 +77,7 @@ class Extra(models.Model):
 #     client = models.ForeignKey(Users, on_delete=models.CASCADE)
 #     desc = models.CharField(max_length=300, blank=True, null=True)
 #     time = models.TimeField(auto_now_add=True)
-#     order = models.ManyToManyField()
+#     order_view = models.ManyToManyField()
 #     summa = models.IntegerField(default=0)
 
 

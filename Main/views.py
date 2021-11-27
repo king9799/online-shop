@@ -74,8 +74,8 @@ def category_del(request, id):
     return redirect('/category_list')
 
 
-def table(request):
-    return render(request, 'data.html')
+def users(request):
+    return render(request, 'users.html')
 
 
 def products_list(request):
@@ -129,3 +129,6 @@ def products_delete(request, id):
     products = Products.objects.get(id=id)
     products.delete()
     return redirect('/products_list')
+
+def orders_list(request):
+    return render(request, 'orders/orders_list.html')

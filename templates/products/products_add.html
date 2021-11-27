@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- left column -->
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
@@ -33,27 +33,30 @@
                         <form method="post">
                             {% csrf_token %}
                             <div class="card-body">
-                                <div class="form-group">
+                                <div class="row">
+                                    <div class="form-group col-md-4 col-sm-12">
                                     <label for="exampleInputText">Name UZ</label>
                                     <input type="text" class="form-control" name = 'name_uz'
                                            placeholder="Name UZ">
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-12">
+                                        <label for="exampleInputText">Name RU</label>
+                                        <input type="text" class="form-control" name = 'name_ru'
+                                               placeholder="Name RU">
+                                    </div>
+                                    <div class="form-group col-md-4 col-sm-12">
+                                        <label for="exampleInputText">Name EN</label>
+                                        <input type="text" class="form-control" name = 'name_en'
+                                               placeholder="Name EN">
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputText">Name RU</label>
-                                    <input type="text" class="form-control" name = 'name_ru'
-                                           placeholder="Name RU">
-                                </div>
-                                <div class="form-group">
-                                    <label for="exampleInputText">Name EN</label>
-                                    <input type="text" class="form-control" name = 'name_en'
-                                           placeholder="Name EN">
-                                </div>
+
 {#                                <div class="form-group">#}
 {#                                    <label for="exampleInputText">Kategoriya</label>#}
 {#                                    <input type="text" class="form-control" name = 'category'#}
 {#                                           placeholder="Kategoriya">#}
 {#                                </div>#}
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-sm-8">
                                     <label for="exampleInputFile">Image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
@@ -62,32 +65,32 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-sm-10">
                                     <label for="exampleInputText">Ta'rif UZ</label>
                                     <input type="text" class="form-control" name="desc_uz"
                                            placeholder="Tarif UZ">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-sm-8">
                                     <label for="exampleInputText">Ta`rif RU</label>
                                     <input type="text" class="form-control" name="desc_ru"
                                            placeholder="Ta`rif RU">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-sm-8">
                                     <label for="exampleInputText">Ta`rif EN</label>
                                     <input type="text" class="form-control" name="desc_en"
                                            placeholder="Ta`rif EN">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-sm-4">
                                     <label>Narxi</label>
                                     <input type="number" class="form-control" name="price"
                                            placeholder="100000">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-sm-4">
                                     <label> O'lchovi</label>
                                     <input type="text" class="form-control" name="unit"
                                            placeholder="kg/L/dona">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group col-md-6 col-sm-4">
                                     <label for="exampleInputText">Statusi</label>
                                     <input type="text" class="form-control" name="status"
                                            placeholder="Eng kop sotilgan/SALE!/Yangi mahsulot...">

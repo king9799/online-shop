@@ -21,7 +21,7 @@ urlpatterns = [
     path('dashboard/', dashboard, name='dash'),
     path('', log_in, name="login"),
     path('general/', general, name='general'),
-    path('table/', table, name='name'),
+    path('users/', users, name='users'),
 
     path('products_list/', products_list, name='product_list'),
     path('products_add/', products_add, name='product_add'),
@@ -33,5 +33,7 @@ urlpatterns = [
     path('category_add/', category_add, name='category_add'),
     path('category_delete/<int:id>', category_del, name='category_delete'),
     path('category_edit/<int:id>', category_edit, name='category_edit'),
+
+    path('orders_list/', orders_list, name='orders_list'),
 
 ]

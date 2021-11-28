@@ -35,27 +35,30 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="form-group col-md-4 col-sm-12">
-                                    <label for="exampleInputText">Name UZ</label>
-                                    <input type="text" class="form-control" name = 'name_uz'
-                                           placeholder="Name UZ">
+                                        <label for="exampleInputText">Name UZ</label>
+                                        <input type="text" class="form-control" name='name_uz'
+                                               placeholder="Name UZ">
                                     </div>
                                     <div class="form-group col-md-4 col-sm-12">
                                         <label for="exampleInputText">Name RU</label>
-                                        <input type="text" class="form-control" name = 'name_ru'
+                                        <input type="text" class="form-control" name='name_ru'
                                                placeholder="Name RU">
                                     </div>
                                     <div class="form-group col-md-4 col-sm-12">
                                         <label for="exampleInputText">Name EN</label>
-                                        <input type="text" class="form-control" name = 'name_en'
+                                        <input type="text" class="form-control" name='name_en'
                                                placeholder="Name EN">
                                     </div>
                                 </div>
 
-{#                                <div class="form-group">#}
-{#                                    <label for="exampleInputText">Kategoriya</label>#}
-{#                                    <input type="text" class="form-control" name = 'category'#}
-{#                                           placeholder="Kategoriya">#}
-{#                                </div>#}
+                                <div class="form-group col-md-4 col-sm-12">
+                                    <label for="exampleInputText">Kategoriya</label>
+                                    <select name="category" class="form-control" >
+                                        {% for cate in category %}
+                                        <option value="{{ cate.id }}">{{ cate.name_uz }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                                 <div class="form-group col-md-6 col-sm-8">
                                     <label for="exampleInputFile">Image</label>
                                     <div class="input-group">
@@ -65,9 +68,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6 col-sm-10">
+                                <div class="form-group col-md-12 col-sm-10">
                                     <label for="exampleInputText">Ta'rif UZ</label>
-                                    <input type="text" class="form-control" name="desc_uz"
+                                    <input type="text" class="form-control " name="desc_uz"
                                            placeholder="Tarif UZ">
                                 </div>
                                 <div class="form-group col-md-6 col-sm-8">

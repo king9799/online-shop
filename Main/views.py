@@ -1,11 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .models import *
-
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 
+
+
 def index(request):
+
     return render(request, "index.html")
 
 
@@ -42,19 +45,23 @@ def category_list(request):
 
 
 def category_add(request):
-    if request.method == "POST":
-        print(request.POST)
+    print(request)
+    if request.method == "POST" and request.FILES['img']:
+        print(request.FILES)
+        upload_photo = request.FILES['img']
+        fss = FileSystemStorage()
+        file = fss.save(upload_photo.name, upload_photo)
+        file_url = fss.url(file)
         a = request.POST
         cat = Categories.objects.create(
-
             name_uz=a['name_uz'],
             name_ru=a['name_ru'],
             name_en=a['name_en'],
-            img=a['img']
+            img=file_url
         )
         cat.save()
         return redirect('/category_list')
-    return render(request, 'category/category_add.html')
+    return render(request, 'category/category_add.html', {})
 
 
 def category_edit(request, id):
@@ -85,6 +92,7 @@ def products_list(request):
 
 def products_add(request):
     print(request.POST)
+    category = Categories.objects.all()
     if request.method == "POST":
         a = request.POST
         product = Products.objects.create(
@@ -102,7 +110,7 @@ def products_add(request):
         )
         product.save()
         return redirect('/products_list')
-    return render(request, 'products/products_add.html')
+    return render(request, 'products/products_add.html', {'category': category})
 
 
 def products_edit(request, id):
@@ -129,6 +137,7 @@ def products_delete(request, id):
     products = Products.objects.get(id=id)
     products.delete()
     return redirect('/products_list')
+
 
 def orders_list(request):
     return render(request, 'orders/orders_list.html')

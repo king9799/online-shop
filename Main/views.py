@@ -3,13 +3,37 @@ from django.contrib.auth import authenticate, login, logout
 from .models import *
 from django.core.files.storage import FileSystemStorage
 
+
 # Create your views here.
 
 
+def service(request):
+    serv = Extra.objects.all()
+    return render(request, 'service/service.html', {'serv': serv})
 
-def index(request):
 
-    return render(request, "index.html")
+def service_edit(request, id):
+    ex = Extra.objects.get(id=id)
+    ext = Extra.objects.all()
+    if request.method == 'POST':
+        a = request.POST
+        ext.name = a["name"]
+        ext.quantity = a["quantity"]
+        ext.save()
+        return redirect('/service')
+    return render(request, 'service/service_edit.html', {'ex': ex, 'extra': ext})
+
+
+def service_add(request):
+    if request.method == "POST":
+        a = request.POST
+        ser = Extra.objects.create(
+            name=a['name'],
+            quantity=a['quantity'],
+        )
+        ser.save()
+        return redirect('/service')
+    return render(request, 'service/service_add.html')
 
 
 def dashboard(request):
@@ -17,35 +41,35 @@ def dashboard(request):
 
 
 def log_in(request):
-    print(request.POST)
+    # print(request.POST)
     if request.method == "POST":
-        # print(request.POST)
-        # username = request.POST['username']
-        # password = request.POST['password']
-        # user = authenticate(
-        #     request,
-        #     username=username,
-        #     password=password,
-        # )
-        # if user is None:
-        #     return redirect("/")
-        # login(request, user)
+        print(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(
+            request,
+            username=username,
+            password=password,
+        )
+        if user is None:
+            return redirect("/")
+        login(request, user)
         return redirect('/dashboard')
     else:
         return render(request, 'login.html')
 
 
-def general(request):
-    return render(request, 'general.html')
+def izoh(request):
+    return render(request, 'izoh.html')
 
 
 def category_list(request):
+    client = Users.objects.all()
     category = Categories.objects.all()
-    return render(request, 'category/category_list.html', {'categories': category})
+    return render(request, 'category/category_list.html', {'categories': category, 'client': client})
 
 
 def category_add(request):
-    print(request)
     if request.method == "POST" and request.FILES['img']:
         print(request.FILES)
         upload_photo = request.FILES['img']
@@ -71,7 +95,7 @@ def category_edit(request, id):
         a = request.POST
         categories.name = a["name_uz"]
         categories.save()
-        return redirect('/dashboard')
+        return redirect('/category_list')
     return render(request, "category/category_edit.html", {'category': category, 'categories': categories})
 
 
@@ -96,7 +120,6 @@ def products_add(request):
     if request.method == "POST":
         a = request.POST
         product = Products.objects.create(
-            # category=a['category'],
             name_uz=a['name_uz'],
             name_ru=a['name_ru'],
             name_en=a['name_en'],
@@ -114,23 +137,25 @@ def products_add(request):
 
 
 def products_edit(request, id):
+    category = Categories.objects.all()
     products = Products.objects.get(id=id)
     product = Products.objects.all()
     if request.method == 'POST':
         a = request.POST
         product.name_uz = a['name_uz']
-        # product.name_ru = a['name_ru']
-        # product.name_en = a['name_en']
-        # product.img = a['img']
-        # product.desc_uz = a['desc_uz']
-        # product.desc_ru = a['desc_ru']
-        # product.desc_en = a['desc_en']
-        # product.price = a['price']
-        # product.unit = a['unit']
-        # product.status = a['status']
+        product.name_ru = a['name_ru']
+        product.name_en = a['name_en']
+        product.img = a['img']
+        product.desc_uz = a['desc_uz']
+        product.desc_ru = a['desc_ru']
+        product.desc_en = a['desc_en']
+        product.price = a['price']
+        product.unit = a['unit']
+        product.status = a['status']
         product.save()
         return redirect('/products_list')
-    return render(request, "products/products_list.html", {'products': products, 'product': product})
+    return render(request, "products/products_edit.html",
+                  {'products': products, 'product': product, 'category': category})
 
 
 def products_delete(request, id):

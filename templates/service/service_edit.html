@@ -7,12 +7,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Kategoriyalar</h1>
+                    <h1>Hizmatlar</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
-                        <li class="breadcrumb-item active">Kategoriya qo`shish</li>
+                        <li class="breadcrumb-item active">Hizmat tahriri</li>
                     </ol>
                 </div>
             </div>
@@ -26,35 +26,22 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Kategoriya qo'shish</h3>
+                            <h3 class="card-title">Hizmat taxriri</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form method="post">
                             {% csrf_token %}
                             <div class="card-body">
-                                <label>Name UZ</label>
+                                <label>Nami</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" value="{{ category.name_uz }}" name='name_uz' placeholder="Name UZ">
+                                    <input type="text" class="form-control" value="{{ ex.name }}" name='name' placeholder="Name">
                                     <div class="input-group-append"></div>
                                 </div>
-                                <label>Name RU</label>
+                                <label>Qiymat</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" value="{{ category.name_ru }}" name='name_uz' placeholder="Name Ru">
+                                    <input type="text" class="form-control" value="{{ ex.quantity }}" name='quantity' placeholder="11111">
                                     <div class="input-group-append"></div>
-                                </div>
-                                <label for="exampleInputText">Name EN</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control" value="{{ category.name_en }}" name='name_uz' placeholder="Name EN">
-                                </div>
-                                <label>Image</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group">
-                                        <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="img">
-                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="col-4">
                                     <button type="submit" class="btn btn-primary btn-block">Save</button>

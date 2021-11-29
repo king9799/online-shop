@@ -19,11 +19,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('index/', index, name='index'),
     path('dashboard/', dashboard, name='dash'),
     path('', log_in, name="login"),
-    path('general/', general, name='general'),
+    path('izoh/', izoh, name='izoh'),
     path('users/', users, name='users'),
+
+    path('service/', service, name='service'),
+    path('service_edit/<int:id>', service_edit, name='service_edit'),
+    path('service_add/', service_add, name='service_add'),
 
     path('products_list/', products_list, name='product_list'),
     path('products_add/', products_add, name='product_add'),

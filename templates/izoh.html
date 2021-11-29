@@ -4,11 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin | Buyurtmalar </title>
+    <title>Admin | Hulosalar</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
     <!-- DataTables -->
@@ -123,7 +122,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link active active">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-store"></i>
                             <p>Uzbegim Store <i class="fas fa-angle-left right"></i></p>
                         </a>
@@ -135,7 +134,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/category_list" class="nav-link active">
+                                <a href="/category_list" class="nav-link">
                                     <i class="far fa-list-alt"></i>
                                     <p>Kategoriyalar</p>
                                 </a>
@@ -192,7 +191,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="/izoh" class="nav-link">
+                        <a href="/izoh" class="nav-link active">
                             <i class="nav-icon fas fa-comment-alt"></i>
                             <p>
                                 Hulosalar
@@ -213,12 +212,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Kategoriyalar</h1>
+                        <h1>Hulosa</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Kategoriyalar</li>
+                            <li class="breadcrumb-item active">Hulosa va kommentlar</li>
                         </ol>
                     </div>
                 </div>
@@ -233,55 +232,46 @@
                         <!-- /.card -->
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Kategoriyalar ro'yhati</h3>
+                                <h3 class="card-title">Hulosalar </h3>
                             </div>
-                            <!-- /.card-header -->
                             <div class="card-body">
-                                <a href='/category_add' class="col-2 btn btn-primary mb-2">Kategoriya qo'shish</a>
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Nomi Uz</th>
-                                        <th>Nomi Ru</th>
-                                        <th>Nomi En</th>
-                                        <th>Rasmi</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <th>#</th>
+                                        <th>Komment</th>
+                                        <th>Xulosa</th>
+                                        <th>Klient</th>
+                                        <th>Tel nomer</th>
+                                        <th>Yaratildi</th>
+                                        <th>Ro`yhat</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for c in categories  %}
-                                        <tr>
-                                            <th scope="row">{{ c.id }}</th>
-
-                                            <td>{{ c.name_uz }}</td>
-                                            <td>{{ c.name_ru }}</td>
-                                            <td>{{ c.name_en }}</td>
-                                            <td> <img src="{{ c.img }}"></td>
-                                            <td><a href="/category_edit/{{ c.id }}" class="btn btn-primary">Edit</a>
-                                            </td>
-                                            <td><a href="/category_delete/{{ c.id }}" class="btn btn-danger">Delete</a>
-                                            </td>
-                                        <tr>
-                                    {% endfor %}
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Internet Explorer 4.0</td>
+                                        <td>Win 95+</td>
+                                        <td> 4</td>
+                                        <td>X</td>
+                                        <td>X</td>
+                                        <td>X</td>
+                                    </tr>
                                     </tbody>
                                     <tfoot>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Nomi Uz</th>
-                                        <th>Nomi Ru</th>
-                                        <th>Nomi En</th>
-                                        <th>Rasmi</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <th>#</th>
+                                        <th>Komment</th>
+                                        <th>Xulosa</th>
+                                        <th>Klient</th>
+                                        <th>Tel nomer</th>
+                                        <th>Yaratildi</th>
+                                        <th>Ro`yhat</th>
                                     </tr>
                                     </tfoot>
                                 </table>
                             </div>
-                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card -->
                     </div>
                     <!-- /.col -->
                 </div>

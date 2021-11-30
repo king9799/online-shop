@@ -93,10 +93,13 @@ def category_edit(request, id):
     categories = Categories.objects.all()
     if request.method == 'POST':
         a = request.POST
-        categories.name = a["name_uz"]
-        categories.save()
+        category.name_uz = a["name_uz"]
+        category.name_ru = a["name_ru"]
+        category.name_en = a["name_en"]
+        category.img = a["img"]
+        category.save()
         return redirect('/category_list')
-    return render(request, "category/category_edit.html", {'category': category, 'categories': categories})
+    return render(request, "category/category_edit.html", {'category': categories, 'categories': category})
 
 
 def category_del(request, id):
@@ -138,8 +141,8 @@ def products_add(request):
 
 def products_edit(request, id):
     category = Categories.objects.all()
-    products = Products.objects.get(id=id)
-    product = Products.objects.all()
+    product = Products.objects.get(id=id)
+    products = Products.objects.all()
     if request.method == 'POST':
         a = request.POST
         product.name_uz = a['name_uz']
@@ -155,7 +158,7 @@ def products_edit(request, id):
         product.save()
         return redirect('/products_list')
     return render(request, "products/products_edit.html",
-                  {'products': products, 'product': product, 'category': category})
+                  {'products': product, 'product': products, 'category': category})
 
 
 def products_delete(request, id):

@@ -16,10 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from Main.views import *
-from UzbegimBot.urls import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Main.urls')),
-    path('bot/', include('UzbegimBot.urls')),
 ]

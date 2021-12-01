@@ -17,12 +17,14 @@ from django.urls import path
 from Main.views import *
 from django.conf import settings
 from django.conf.urls.static import static
+from .uzbegim_bot import *
 
 urlpatterns = [
     path('dashboard/', dashboard, name='dash'),
     path('', log_in, name="login"),
     path('izoh/', izoh, name='izoh'),
     path('users/', users, name='users'),
+    path('api', api, name='api'),
 
     path('service/', service, name='service'),
     path('service_edit/<int:id>', service_edit, name='service_edit'),
@@ -32,7 +34,6 @@ urlpatterns = [
     path('products_add/', products_add, name='product_add'),
     path('products_delete/<int:id>', products_delete, name='products_delete'),
     path('products_edit/<int:id>', products_edit, name='products_edit'),
-
 
     path('category_list/', category_list, name='category_list'),
     path('category_add/', category_add, name='category_add'),

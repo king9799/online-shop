@@ -186,7 +186,6 @@
                             <i class="nav-icon fas fa-dollar-sign"></i>
                             <p>
                                 Valyuta kurslari
-                                <i class="nav-icon fas fa-angle-left right"></i>
                             </p>
                         </a>
                     </li>
@@ -250,12 +249,12 @@
                                 </tr>
                                     </thead>
                                     <tbody>
-                                    {% for o in users %}
+                                    {% for o in bot_user%}
                                     <tr>
                                             <th scope="row">{{ o.id }}</th>
                                             <td>{{ o.first_name }}</td>
                                             <td>{{ o.last_name }}</td>
-                                            <td>{{ o.phone_numer }}</td>
+                                            <td>{{ o.phone_number }}</td>
                                             <td>{{ o.address }}</td>
                                             <td>haridlar soni </td>
                                             <td>{{ o.bonus }}</td>
@@ -263,7 +262,7 @@
                                             <td>{{ o.data }}</td>
                                             <td><a href="/products_edit/{{ o.id }}" class="btn btn-primary">Block</a>
                                             </td>
-                                            <td><a href="/products_delete/{{ o.id }}" class="btn btn-danger">CH/Pass</a>
+                                            <td><a href="/products_delete/{{ o.id }}" class="btn btn-danger">Delete</a>
                                             </td>
                                     </tr>
                                     {% endfor %}

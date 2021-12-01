@@ -5,13 +5,15 @@ from django.db import models
 class Users(models.Model):
     user_id = models.BigIntegerField(default=0, unique=True)
     username = models.CharField(max_length=30, blank=True, null=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    phone_number = models.CharField(max_length=128)
-    address = models.CharField(max_length=200)
-    bonus = models.IntegerField(default=0)
-    active = models.DateTimeField(default=False)
-    data = models.DateTimeField(auto_created=True)
+    first_name = models.CharField(max_length=30, blank=True, null=True)
+    last_name = models.CharField(max_length=30, blank=True, null=True)
+    phone_number = models.CharField(max_length=128, blank=True, null=True)
+    address = models.CharField(max_length=200, blank=True, null=True)
+    bonus = models.IntegerField(default=0, blank=True, null=True)
+    active = models.BooleanField(default=False)
+    language = models.CharField(max_length=10, blank=True, null=True)
+    data = models.DateTimeField(auto_created=True, blank=True, null=True)
+    step = models.IntegerField(default=0)
 
     def __str__(self):
         return self.first_name

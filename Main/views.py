@@ -109,7 +109,8 @@ def category_del(request, id):
 
 
 def users(request):
-    return render(request, 'users.html')
+    bot_user = Users.objects.all()
+    return render(request, 'users.html', {'bot_user': bot_user})
 
 
 def products_list(request):

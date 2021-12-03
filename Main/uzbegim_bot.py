@@ -26,7 +26,8 @@ def api(request):
 @bot.message_handler(commands=["start"])
 def start(m):
 
-    all_users = Users.objects.filter(user_id=m.chat.id)
+    all_users = Users.objects.filter(user_id=m.chat.id, step=6)
+    print(all_users)
     if len(all_users) > 0:
         markup = base_uz()
         bot.send_message(m.chat.id, "menu", reply_markup=markup)
@@ -42,8 +43,6 @@ def start(m):
         btn3 = types.KeyboardButton("🆘 Yordam / Помощь / Help")
         markup.add(btn, btn1, btn2, btn3)
         bot.send_message(m.chat.id, text1, reply_markup=markup)
-
-
 
 
 @bot.message_handler(func=lambda message: True)

@@ -36,17 +36,17 @@
                                  <div class="row">
                                     <div class="form-group col-md-4 col-sm-12">
                                         <label for="exampleInputText">Name UZ</label>
-                                        <input type="text" class="form-control" name='name_uz'
+                                        <input type="text" class="form-control" value="{{ products.name_uz }}" name='name_uz'
                                                placeholder="Name UZ">
                                     </div>
                                     <div class="form-group col-md-4 col-sm-12">
                                         <label for="exampleInputText">Name RU</label>
-                                        <input type="text" class="form-control" name='name_ru'
-                                               placeholder="Name RU">
+                                        <input type="text" class="form-control" value="{{ products.name_ru }}" name='name_ru'
+                                           placeholder="Name RU">
                                     </div>
                                     <div class="form-group col-md-4 col-sm-12">
                                         <label for="exampleInputText">Name EN</label>
-                                        <input type="text" class="form-control" name='name_en'
+                                        <input type="text" class="form-control" value="{{ products.name_en }}" name='name_en'
                                                placeholder="Name EN">
                                     </div>
                                 </div>
@@ -62,34 +62,34 @@
                                     <label for="exampleInputFile">Image</label>
                                     <div class="input-group">
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="img">
+                                            <input type="file" class="custom-file-input" value="{{ products.img }}" name="img">
                                             <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
                                 <label for="exampleInputText">Ta'rif UZ</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="desc_uz"
+                                    <input type="text" class="form-control" value="{{ products.desc_uz }}" name="desc_uz"
                                            placeholder="Tarif UZ">
                                 </div>
                                 <label for="exampleInputText">Ta`rif RU</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="desc_ru"
+                                    <input type="text" class="form-control" value="{{ products.desc_ru }}" name="desc_ru"
                                            placeholder="Ta`rif RU">
                                 </div>
                                 <label for="exampleInputText">Ta`rif EN</label>
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" name="desc_en"
+                                    <input type="text" class="form-control" value="{{ products.desc_en }}" name="desc_en"
                                            placeholder="Ta`rif EN">
                                 </div>
                                 <label>Narxi</label>
                                 <div class="input-group mb-3">
-                                    <input type="number" class="form-control" name="price"
+                                    <input type="number" class="form-control" value="{{ products.price }}" name="price"
                                            placeholder="100000">
                                 </div>
                                 <label> O'lchov birligi</label>
                                 <div class="input-group mb-3">
-                                    <select name="unit" class="form-control" >
+                                    <select value="{{ products.unit }}" name="unit" class="form-control" >
                                         <option > KG </option>
                                         <option > Dona </option>
                                         <option > L </option>
@@ -97,7 +97,7 @@
                                 </div>
                                 <label for="exampleInputText">Statusi</label>
                                 <div class="input-group mb-3">
-                                    <select name="status" class="form-control" >
+                                    <select value="{{ products.status }}" name="status" class="form-control" >
                                         <option >  </option>
                                         <option > SALE! </option>
                                         <option > Ommabop mahsulot </option>

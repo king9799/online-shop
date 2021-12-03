@@ -109,7 +109,7 @@ def category_del(request, id):
 
 
 def users(request):
-    bot_user = Users.objects.all()
+    bot_user = Users.objects.filter(active=True)
     return render(request, 'users.html', {'bot_user': bot_user})
 
 

@@ -12,12 +12,14 @@ class Users(models.Model):
     bonus = models.IntegerField(default=0, blank=True, null=True)
     active = models.BooleanField(default=False)
     language = models.CharField(max_length=10, blank=True, null=True)
-    data = models.DateTimeField(auto_created=True, blank=True, null=True)
+    data = models.DateTimeField(auto_now_add=True)
     step = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.first_name
-
+        if self.first_name is None:
+            return f'{self.user_id}'
+        else:
+            return self.first_name
 
 class Categories(models.Model):
     name_uz = models.CharField(max_length=80, blank=True, null=True)

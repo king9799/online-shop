@@ -1,3 +1,4 @@
+from .models import *
 from telebot import *
 def base_uz():
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
@@ -14,6 +15,7 @@ def base_uz():
     markup.add(btn4, btn5, btn6)
     markup.add(btn, btn7)
     return markup
+
 def base_ru():
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, row_width=3)
     btn = types.KeyboardButton("💵 Курс валюты")
@@ -46,7 +48,7 @@ def base_en():
 
 def products():
     markup = types.InlineKeyboardMarkup(row_width=2)
-    btn = types.InlineKeyboardButton(" Mol go`shti", callback_data="0")
+    btn = types.InlineKeyboardButton({Categories.name_uz}, callback_data="0")
     btn1 = types.InlineKeyboardButton(" Qo`y go`shti", callback_data="1")
     btn2 = types.InlineKeyboardButton(" Tovuq go`shti", callback_data="2")
     btn3 = types.InlineKeyboardButton("Kitoblar", callback_data="3")

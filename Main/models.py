@@ -12,7 +12,7 @@ class Users(models.Model):
     bonus = models.IntegerField(default=0, blank=True, null=True)
     active = models.BooleanField(default=False)
     language = models.CharField(max_length=10, blank=True, null=True)
-    data = models.DateTimeField(auto_created=True, blank=True, null=True)
+    data = models.DateTimeField(auto_now_add=True)
     step = models.IntegerField(default=0)
 
     def __str__(self):
@@ -31,20 +31,37 @@ class Categories(models.Model):
 
 
 class Products(models.Model):
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE, blank=True, null=True)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
     name_uz = models.CharField(max_length=100, blank=True, null=True)
     name_ru = models.CharField(max_length=100, blank=True, null=True)
     name_en = models.CharField(max_length=100, blank=True, null=True)
-    img = models.ImageField()
+    img = models.ImageField(upload_to="images/")
     desc_uz = models.TextField(blank=True, null=True)
     desc_ru = models.TextField(blank=True, null=True)
     desc_en = models.TextField(blank=True, null=True)
-    price = models.ImageField(default=0)
-    unit = models.CharField(max_length=20)
+    active = models.BooleanField(default=True)
+    cr_on = models.DateTimeField(auto_now_add=True)
+    cr_up = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name_uz
+
+
+class ProductItem(models.Model):
+    product_name = models.ForeignKey(Products, on_delete=models.CASCADE)
+    name_uz = models.CharField(max_length=100, blank=True, null=True)
+    name_ru = models.CharField(max_length=100, blank=True, null=True)
+    name_en = models.CharField(max_length=100, blank=True, null=True)
+    img = models.ImageField(upload_to="images/")
+    desc_uz = models.TextField(blank=True, null=True)
+    desc_ru = models.TextField(blank=True, null=True)
+    desc_en = models.TextField(blank=True, null=True)
+    price = models.IntegerField(default=0)
+    amount = models.CharField(max_length=20)
     status = models.CharField(max_length=50, blank=True, null=True)
     active = models.BooleanField(default=True)
-    cr_on = models.DateTimeField(auto_created=True, blank=True, null=True)
-    cr_up = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    cr_on = models.DateTimeField(auto_now_add=True)
+    cr_up = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name_uz
@@ -75,12 +92,30 @@ class Extra(models.Model):
     def __str__(self):
         return f'name:  {self.name} | miqdori: {self.quantity}'
 
-# class Orders(models.Model):
-#     client = models.ForeignKey(Users, on_delete=models.CASCADE)
-#     desc = models.CharField(max_length=300, blank=True, null=True)
-#     time = models.TimeField(auto_now_add=True)
-#     order_view = models.ManyToManyField()
-#     summa = models.IntegerField(default=0)
+
+class Orders(models.Model):
+    order_n = models.CharField(max_length=30, unique=True)
+    client = models.ForeignKey(Users, on_delete=models.CASCADE)
+    desc = models.CharField(max_length=300, blank=True, null=True)
+    time = models.TimeField(auto_now_add=True)
+    summa = models.IntegerField(default=0)
+    l_order_item = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.order_n
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(Orders, on_delete=models.CASCADE)
+    product_item = models.ForeignKey(ProductItem, null=True, on_delete=models.SET_NULL)
+    desc = models.CharField(max_length=300, blank=True, null=True)
+    amount = models.CharField(max_length=80, blank=True, null=True)
+    time = models.TimeField(auto_now_add=True)
+    summa = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.order.order_n
+
 
 
 

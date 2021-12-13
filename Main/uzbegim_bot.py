@@ -1,12 +1,17 @@
-import datetime
-
-from telebot import *
 from django.shortcuts import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from .buttons import *
+from .tokens import *
+from .controller import *
+from telebot import types
+import telebot
+from UzbegimProject import settings
+import requests
 
-bot = TeleBot("2102894205:AAE-qFT15tEykiaUuWCp79gxU9OMxKgsY_Y")
+
+
+bot = TeleBot(tokenlist['uzbegim'])
 
 
 @csrf_exempt
@@ -22,27 +27,52 @@ def api(request):
         return HttpResponse(status=200)
 
 
-@bot.message_handler(commands=["start"])
+@bot.message_handler(commands=["start", 'hello'])
 def start(message):
-    text = f'Assalomu alaykum hurmatli {message.from_user.first_name}.Bu Uzbegim online-market boti. \n\nBizning ' \
-           f'xizmatlarimizdan foydalanish uchun avval ro`yhatdan o`ting. '
-    bot.send_message(message.chat.id, text)
-    text1 = "Muloqot tilini tanlang\nВыберите язык\nSelect Language"
-    markup = types.ReplyKeyboardMarkup(row_width=3, resize_keyboard=True)
-    btn = types.KeyboardButton("🇺🇿 O'zbek tili")
-    btn1 = types.KeyboardButton("🇷🇺 Русский язык")
-    btn2 = types.KeyboardButton("🇬🇧 English")
-    btn3 = types.KeyboardButton("🆘 Yordam / Помощь / Help")
-    markup.add(btn, btn1, btn2, btn3)
-    bot.send_message(message.chat.id, text1, reply_markup=markup)
-    user = Users.objects.create(
-        user_id=message.from_user.id,
-        first_name=message.from_user.first_name,
-        username=message.from_user.username,
-        last_name=message.from_user.last_name,
-        step=0
-    )
-    user.save()
+    if message.text == '/hello':
+        btn = InlineController(message, message.chat.id)
+        btn.category()
+
+    else:
+        text = f'Assalomu alaykum hurmatli {message.from_user.first_name}.Bu Uzbegim online-market boti. \n\nBizning ' \
+               f'xizmatlarimizdan foydalanish uchun avval ro`yhatdan o`ting. '
+        bot.send_message(message.chat.id, text)
+        text1 = "Muloqot tilini tanlang\nВыберите язык\nSelect Language"
+        markup = types.ReplyKeyboardMarkup(row_width=3, resize_keyboard=True)
+        btn = types.KeyboardButton("🇺🇿 O'zbek tili")
+        btn1 = types.KeyboardButton("🇷🇺 Русский язык")
+        btn2 = types.KeyboardButton("🇬🇧 English")
+        btn3 = types.KeyboardButton("🆘 Yordam / Помощь / Help")
+        markup.add(btn, btn1, btn2, btn3)
+        bot.send_message(message.chat.id, text1, reply_markup=markup)
+        user = Users.objects.create(
+            user_id=message.from_user.id,
+            first_name=message.from_user.first_name,
+            username=message.from_user.username,
+            last_name=message.from_user.last_name,
+            step=0
+        )
+        user.save()
+
+
+@bot.callback_query_handler(func=lambda call: True)
+def call_data(call):
+    category = get_category()
+    if category.filter(name_uz=call.data).exists():
+        btn = InlineController(call, call.from_user.id, call_data=call)
+        btn.products(category.get(name_uz=call.data).id)
+    elif Products.objects.filter(name_uz=call.data).exists():
+        print(call.data)
+        btn = InlineController(call, call.from_user.id, call_data=call)
+        btn.product_item(Products.objects.get(name_uz=call.data).id)
+    elif call.data == "category":
+        btn = InlineController(call, call.from_user.id, call_data=call)
+        btn.category()
+    elif ProductItem.objects.filter(id=call.data).exists():
+        proitem = ProductItem.objects.get(id=call.data).product_name.category.id
+        print("sss",proitem)
+        btn = InlineController(call, call.from_user.id, call_data=call)
+        btn.products(proitem)
 
 
 @bot.message_handler(func=lambda message: True)

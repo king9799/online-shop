@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -78,11 +79,11 @@ WSGI_APPLICATION = 'UzbegimProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'HOST': 'localhost',
+        'NAME': 'd2snln2q7d71bl',
+        'HOST': 'ec2-54-156-60-12.compute-1.amazonaws.com',
         'PORT': '5432',
-        'USER': 'postgres',
-        'PASSWORD': '1111',
+        'USER': 'qjbzxastcbuing',
+        'PASSWORD': 'e50a6b7d1dddab056ce802114c5a695253c747de1b8f47bcd94c9bd28db921c2',
     }
 }
 
@@ -125,12 +126,14 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+django_heroku.settings(locals())
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')

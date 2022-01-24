@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-hxjqefbz$yq2v-b&(59s-vc)^q5c%fuwo2uqe%jr4v1#0t0vls
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['525c-213-230-102-210.ngrok.io', '127.0.0.1']
+ALLOWED_HOSTS = ['django-ify.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -77,8 +78,12 @@ WSGI_APPLICATION = 'UzbegimProject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'HOST': 'django-ify.herokuapp.com',
+        'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': '1111',
     }
 }
 
@@ -125,6 +130,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

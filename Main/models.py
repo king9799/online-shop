@@ -11,19 +11,22 @@ class Users(models.Model):
     address = models.CharField(max_length=200, blank=True, null=True)
     bonus = models.IntegerField(default=0, blank=True, null=True)
     active = models.BooleanField(default=False)
-    language = models.CharField(max_length=10, blank=True, null=True)
+    language = models.CharField(max_length=100, blank=True, null=True)
     data = models.DateTimeField(auto_now_add=True)
     step = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.first_name
+        if self.first_name is None:
+            return f'{self.user_id}'
+        else:
+            return self.first_name
 
 
 class Categories(models.Model):
     name_uz = models.CharField(max_length=80, blank=True, null=True)
     name_ru = models.CharField(max_length=80, blank=True, null=True)
     name_en = models.CharField(max_length=80, blank=True, null=True)
-    img = models.ImageField(blank=True, null=True)
+    img = models.ImageField(upload_to='image/', blank=True, null=True)
     active = models.BooleanField(default=True)
 
     def __str__(self):
@@ -59,6 +62,7 @@ class ProductItem(models.Model):
     price = models.IntegerField(default=0)
     amount = models.CharField(max_length=20)
     status = models.CharField(max_length=50, blank=True, null=True)
+    unit = models.CharField(max_length=16, blank=True, null=True)
     active = models.BooleanField(default=True)
     cr_on = models.DateTimeField(auto_now_add=True)
     cr_up = models.DateTimeField(auto_now=True)
@@ -100,6 +104,8 @@ class Orders(models.Model):
     time = models.TimeField(auto_now_add=True)
     summa = models.IntegerField(default=0)
     l_order_item = models.IntegerField(default=0)
+    active = models.BooleanField(default=True)
+    cr_on = models.DateField(auto_now=True)
 
     def __str__(self):
         return self.order_n
@@ -117,7 +123,12 @@ class OrderItem(models.Model):
         return self.order.order_n
 
 
+class Images(models.Model):
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/', blank=True, null=True)
 
+    def __str__(self):
+        return f'images{self.id}'
 
 
 

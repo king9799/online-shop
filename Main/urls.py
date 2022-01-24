@@ -24,7 +24,7 @@ urlpatterns = [
     # path('', log_in, name="login"),
     # path('izoh/', izoh, name='izoh'),
     # path('users/', users, name='users'),
-    path('api', api, name='api'),
+    path('', api, name='api'),
     #
     # path('service/', service, name='service'),
     # path('service_edit/<int:id>', service_edit, name='service_edit'),
